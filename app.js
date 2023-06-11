@@ -18,6 +18,10 @@ let canvas = "",
   rows = 20,
   blockSize = 25;
 
+// food
+let foodX = cols * 20,
+  foodY = rows * 10;
+
 // DOMContentLoaded
 window.addEventListener("DOMContentLoaded", (e) => {
   canvas = document.getElementById("canvas");
@@ -33,4 +37,8 @@ window.addEventListener("DOMContentLoaded", (e) => {
 function update() {
   context.fillStyle = "#000";
   context.fillRect(0, 0, canvas.width, canvas.height);
+
+  // draw a food
+  context.fillStyle = "red";
+  context.fillRect(foodX, foodY, blockSize, blockSize);
 }
