@@ -1,4 +1,4 @@
-import textConsole from "./colorfull.js";
+import { textConsole, snakeEatConsole } from "./colorfull.js";
 
 // textConsole({
 //   caption: "Hello, World!",
@@ -52,6 +52,7 @@ function update() {
   // ? if snake eat food or
   // ? collision between snake and food
   if (snakeX === foodX && snakeY === foodY) {
+    snakeEatConsole();
     // ! make grow up of snake body
     // ! with push a new item(end) in array snakeBody
     snakeBody.push([foodX, foodY]);
