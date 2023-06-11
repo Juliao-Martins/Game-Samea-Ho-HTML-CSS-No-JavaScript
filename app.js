@@ -50,6 +50,8 @@ window.addEventListener("DOMContentLoaded", (e) => {
 // all thing will load here
 // inside function
 function update() {
+  if (!gameOver) return;
+
   context.fillStyle = "#000";
   context.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -87,6 +89,25 @@ function update() {
   // draw a food
   context.fillStyle = "red";
   context.fillRect(foodX, foodY, blockSize, blockSize);
+
+  // collision snake between its own body
+  for (let i = 0; i < snakeBody.length; i++) {
+    if (snakeBody[i][0] === snakeX && snakeBody[i][1] === snakeY) {
+      gameOver = false;
+      alert("Game over!");
+    }
+  }
+
+  // make boundaries of snake to game over
+  if (
+    snakeX < 0 ||
+    snakeX >= cols * blockSize ||
+    snakeY < 0 ||
+    snakeY >= rows * blockSize
+  ) {
+    gameOver = false;
+    alert("Game Over!");
+  }
 
   // render score in canvas
   context.fillStyle = "#ddd";
