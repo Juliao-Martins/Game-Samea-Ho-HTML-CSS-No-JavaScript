@@ -19,8 +19,8 @@ let canvas = "",
   blockSize = 25;
 
 // food
-let foodX = cols * 20,
-  foodY = rows * 10;
+let foodX = 0,
+  foodY = 0;
 
 // DOMContentLoaded
 window.addEventListener("DOMContentLoaded", (e) => {
@@ -29,6 +29,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
   canvas.height = rows * blockSize;
   context = canvas.getContext("2d");
 
+  placeFood(); // ! invoke placeFood function here before update
   update(); // ! invoke update function here
 });
 
@@ -41,4 +42,9 @@ function update() {
   // draw a food
   context.fillStyle = "red";
   context.fillRect(foodX, foodY, blockSize, blockSize);
+}
+
+function placeFood() {
+  foodX = Math.floor(Math.random() * cols) * blockSize;
+  foodY = Math.floor(Math.random() * rows) * blockSize;
 }
