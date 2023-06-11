@@ -18,6 +18,10 @@ let canvas = "",
   rows = 20,
   blockSize = 25;
 
+// snake
+let snakeX = cols * 5,
+  snakeY = cols * 10;
+
 // DOMContentLoaded
 window.addEventListener("DOMContentLoaded", (e) => {
   canvas = document.getElementById("canvas");
@@ -33,4 +37,8 @@ window.addEventListener("DOMContentLoaded", (e) => {
 function update() {
   context.fillStyle = "#000";
   context.fillRect(0, 0, canvas.width, canvas.height);
+
+  // snake game
+  context.fillStyle = "#0f0";
+  context.fillRect(snakeX, snakeY, blockSize, blockSize);
 }
