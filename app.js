@@ -24,6 +24,10 @@ let snakeX = cols * 5,
   velocityX = 0,
   velocityY = 0;
 
+// food
+let foodX = 0,
+  foodY = 0;
+
 // DOMContentLoaded
 window.addEventListener("DOMContentLoaded", (e) => {
   canvas = document.getElementById("canvas");
@@ -31,9 +35,10 @@ window.addEventListener("DOMContentLoaded", (e) => {
   canvas.height = rows * blockSize;
   context = canvas.getContext("2d");
 
+  placeFood(); // ! invoke placeFood function here before update
+  update(); // ! invoke update function here
+
   setInterval(update, 1000 / 10); // ! invoke update function here
-  // handled keyboard event to snake
-  // with invoke changeDirection function
   window.addEventListener("keyup", changeDirection);
 });
 
@@ -43,11 +48,15 @@ function update() {
   context.fillStyle = "#000";
   context.fillRect(0, 0, canvas.width, canvas.height);
 
-  // snake game
+  // draw a snake
   context.fillStyle = "#0f0";
   snakeX += velocityX * blockSize;
   snakeY += velocityY * blockSize;
   context.fillRect(snakeX, snakeY, blockSize, blockSize);
+
+  // draw a food
+  context.fillStyle = "red";
+  context.fillRect(foodX, foodY, blockSize, blockSize);
 }
 
 // declare changeDirection function
@@ -89,4 +98,9 @@ function changeDirection(e) {
     velocityX = -1;
     velocityY = 0;
   }
+}
+
+function placeFood() {
+  foodX = Math.floor(Math.random() * cols) * blockSize;
+  foodY = Math.floor(Math.random() * rows) * blockSize;
 }
