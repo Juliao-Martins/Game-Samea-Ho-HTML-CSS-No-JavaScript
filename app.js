@@ -21,6 +21,7 @@ let canvas = "",
 // snake
 let snakeX = cols * 5,
   snakeY = cols * 10,
+  snakeBody = [],
   velocityX = 0,
   velocityY = 0;
 
@@ -51,8 +52,21 @@ function update() {
   // ? if snake eat food or
   // ? collision between snake and food
   if (snakeX === foodX && snakeY === foodY) {
+    // ! make grow up of snake body
+    // ! with push a new item(end) in array snakeBody
+    snakeBody.push([foodX, foodY]);
     // ! set new place of food with invoke
     placeFood();
+  }
+
+  // logic to make better snake body
+  // ? continue grow up
+  for (let i = snakeBody.length - 1; i > 0; i--) {
+    snakeBody[i] = snakeBody[i - 1];
+  }
+
+  if (snakeBody.length) {
+    snakeBody[0] = [snakeX, snakeY];
   }
 
   // draw a snake
@@ -60,6 +74,9 @@ function update() {
   snakeX += velocityX * blockSize;
   snakeY += velocityY * blockSize;
   context.fillRect(snakeX, snakeY, blockSize, blockSize);
+  for (let i = 0; i < snakeBody.length; i++) {
+    context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
+  }
 
   // draw a food
   context.fillStyle = "red";
