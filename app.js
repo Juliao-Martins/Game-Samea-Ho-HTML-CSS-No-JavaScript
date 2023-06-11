@@ -48,6 +48,13 @@ function update() {
   context.fillStyle = "#000";
   context.fillRect(0, 0, canvas.width, canvas.height);
 
+  // ? if snake eat food or
+  // ? collision between snake and food
+  if (snakeX === foodX && snakeY === foodY) {
+    // ! set new place of food with invoke
+    placeFood();
+  }
+
   // draw a snake
   context.fillStyle = "#0f0";
   snakeX += velocityX * blockSize;
